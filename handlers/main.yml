@@ -1,6 +1,20 @@
 ---
 # defaults file for galaxyproject.nginx
 
+- name: test nginx configuration
+  command: nginx -t
+  listen:
+    - reload nginx
+    - restart nginx
+  when: not nginx_supervisor
+
+- name: test nginx configuration (supervisor)
+  command: nginx -t
+  listen:
+    - supervisorctl reload nginx
+    - supervisorctl restart nginx
+  when: nginx_supervisor and supervisord_prefix is defined
+
 - name: reload nginx
   service:
     name: nginx
