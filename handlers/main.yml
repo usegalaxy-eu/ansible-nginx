@@ -1,6 +1,12 @@
 ---
 # defaults file for galaxyproject.nginx
 
+- name: Test nginx configuration
+  command: nginx -t
+  listen:
+    - reload nginx
+    - restart nginx
+
 - name: Reload nginx
   ansible.builtin.service:
     name: nginx
