@@ -10,7 +10,7 @@
     - Restart nginx
 
 - name: Ensure nginx cache directory exists
-  file:
+  ansible.builtin.file:
     path: "{{ nginx_cache_dir }}"
     state: directory
     owner: "{{ nginx_conf_user | default('www') }}"
