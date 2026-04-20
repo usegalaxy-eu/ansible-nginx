@@ -50,3 +50,6 @@ __nginx_ssl: "{{ nginx_conf_ssl_certificate is defined and nginx_conf_ssl_certif
 __nginx_sslmode: "{{ 'external' if nginx_ssl_role is defined else 'internal' }}"
 
 nginx_selinux_allow_local_connections: false
+
+# cache directory for `proxy_cache_path` configuration directive
+nginx_cache_dir: "{{ undef() }}"

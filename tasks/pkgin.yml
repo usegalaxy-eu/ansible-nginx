@@ -10,6 +10,15 @@
     - restart nginx
     - supervisorctl restart nginx
 
+- name: Ensure nginx cache directory exists
+  ansible.builtin.file:
+    path: "{{ nginx_cache_dir }}"
+    state: directory
+    owner: "{{ nginx_conf_user | default('www') }}"
+    group: "{{ nginx_conf_group | default('www') }}"
+    mode: "0700"
+  when: nginx_cache_dir is defined
+
 - name: Set permissions on temporary directories
   file:
     path: "{{ item }}"
