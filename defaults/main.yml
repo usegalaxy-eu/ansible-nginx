@@ -6,6 +6,11 @@
 # - for EL-based distributions, this is ignored
 nginx_flavor: core
 
+# where to install nginx configs
+nginx_conf_dir: /etc/nginx
+nginx_conf_file: "{{ nginx_conf_dir }}/nginx.conf"
+nginx_ssl_conf_dir: "{{ nginx_conf_dir }}/ssl"
+
 # server {} block template files to install, without the .j2 extension
 nginx_servers: "{{ nginx_configs | default([]) }}"
 
@@ -25,6 +30,9 @@ nginx_ssl_conf_dir: "{{ nginx_conf_dir }}/ssl"
 nginx_enable_default_ipv6: true
 
 nginx_selinux_allow_local_connections: false
+
+# cache directory for `proxy_cache_path` configuration directive
+nginx_cache_dir: "{{ undef() }}"
 
 # Options for the http {} section of the nginx config, a dictionary
 # nginx_conf_http:
